@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -21,6 +22,19 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("pages.urls")),
+    path("", include("projects.urls")),
     path("projects/", include("projects.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+'''
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import project_index  # Import the project_index view
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("", project_index, name='home'),  # Use project_index at root URL
+    path("projects/", include("projects.urls")),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+'''
